@@ -1,3 +1,10 @@
+## 一键下载
+
+[📦 下载模板 ZIP](https://github.com/lingyupeng/hitsz-design-architecture-thesis/archive/refs/heads/main.zip)
+
+下载后可直接在 Overleaf 中选择 New Project → Upload Project 导入。
+本模板不包含字体，请按下方教程补齐字体后编译。
+
 # 建筑学院硕士学位论文 LaTeX 模板：main 全文模式
 
 正文在一个 `main.tex` 中连续写，用 `\section` 分章；格式与字体设置集中管理。可用于 Overleaf，编译器选择 **XeLaTeX**。
