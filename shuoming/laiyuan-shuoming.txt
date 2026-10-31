@@ -1,0 +1,14 @@
+字体文件名与实际字体：
+songti.ttc：SimSun 宋体，第0字体。
+heiti.ttf：SimHei 黑体。
+kaiti.ttf：KaiTi 楷体。
+yingwen-zhengti.ttf：Times New Roman Regular。
+yingwen-cuti.ttf：Times New Roman Bold。
+yingwen-xieti.ttf：Times New Roman Italic。
+yingwen-cuxieti.ttf：Times New Roman Bold Italic。
+shuxue.ttf：Cambria Math 5.96。
+
+文件名改成拼音，字体内部名称保持原样。
+中文字体来源：https://github.com/xoofee/chinese_fonts ，原仓库说明仅限学习研究。
+Times New Roman 来源：本机系统字体。
+Cambria Math 来源及许可：见 shuxue-shouquan.txt。

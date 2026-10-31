@@ -1,0 +1,97 @@
+% !TeX program = xelatex
+% !BIB program = biber
+% Overleaf主文档：main.tex；编译器：XeLaTeX。
+\def\mulu{./}
+\makeatletter
+\edef\input@path{{\mulu muban/}{\mulu}}
+\makeatother
+\documentclass{lunwen}\edef\wenxianlujing{\mulu wenxian.bib}
+\expandafter\addbibresource\expandafter{\wenxianlujing}
+% 前置内容：qianzhi.tex；后置内容：houzhi.tex；格式：muban/geshi.tex；字体：muban/ziti.tex。
+% 正文层级：section=章，subsection=节，subsubsection=条，paragraph=款。
+\begin{document}
+\input{qianzhi.tex}
+\mainmatter
+
+% ==================== 正文：在这里连续写作 ====================
+\section{绪\quad 论}
+\subsection{研究背景}
+这里开始写你的正文。中文使用宋体，英文和数字使用 Times New Roman。正文自动首行缩进两个汉字，标题与图表自动编号。
+
+这里演示顺序编码的上标引用\cite{lynch1960}。直接在句中说明文献时\cite{lynch1960}，可写“由文献\inlinecite{alexander1977}可知”。示例文献用于演示排版，请替换为你的实际文献。
+\subsection{研究目的与意义}
+\subsubsection{研究目的}
+在此说明研究目的。
+\subsubsection{研究意义}
+在此说明研究意义。
+\subsection{研究内容与方法}
+本研究的分析流程如\figref{fig:framework}所示。
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=.8\linewidth]{\mulu tupian/example-liucheng.pdf}
+ \figurenote{注：此图为排版示意，资料来源为作者绘制}
+ \caption{研究流程示意}\label{fig:framework}
+\end{figure}
+
+
+\subsection{本章小结}
+在此概括本章主要内容，小结中不放图表和公式。
+
+\section{研究方法}
+\subsection{研究数据}
+数据字段如\tabref{tab:fields}所示。空缺值使用横线，表格采用三线表。
+\begin{table}[htbp]
+ \centering\tablefont
+ \caption{数据字段及含义}\label{tab:fields}
+ \begin{tabularx}{\linewidth}{lXr}
+ \toprule 字段&含义&示例值\\\midrule
+ ID&研究单元编号&001\\
+ Area&研究单元面积（$\mathrm{m}^2$）&1200\\
+ Count&观测数量&—\\\bottomrule
+ \end{tabularx}
+\end{table}
+\subsection{模型构建}
+\subsubsection{指标计算}
+指标的计算方法见\eqnref{eq:performance}。
+\begin{equation}
+ P_i=\frac{N_i}{A_i}\qquad i=1,2,\ldots,10
+ \label{eq:performance}
+\end{equation}
+\noindent\hangindent=3em\hangafter=1 式中\quad $P_i$——第 $i$ 个研究单元的指标值；\\
+\hspace*{3em}$N_i$——该单元的观测数量；\\
+\hspace*{3em}$A_i$——该单元面积，单位为 $\mathrm{m}^2$。
+\paragraph{参数设定}
+这里演示第四级标题，目录只列到第三级标题。
+\subsection{跨页表格}
+若表格超过一页，使用 longtable。示例见\tabref{tab:long}；续页自动重复编号和表头。
+\begingroup\tablefont
+\begin{longtable}{p{25mm}p{108mm}}
+\caption{研究变量说明}\label{tab:long}\\
+\toprule 变量&说明\\\midrule\endfirsthead
+\noalign{\vskip 8bp}
+\multicolumn{2}{r}{表\thetable（续表）}\\
+\toprule 变量&说明\\\midrule\endhead
+\bottomrule\endfoot
+面积&研究单元的空间尺度指标\\
+密度&研究单元单位面积的观测数量\\
+可达性&研究单元与周边空间之间的连接程度\\
+混合度&研究单元内不同功能的组合程度\\
+\end{longtable}
+\endgroup
+\subsection{本章小结}
+在此概括方法和数据。
+
+% ==================== 06 结论 ====================
+\conclusiontitle
+在此填写结论。结论不加章序号，不标注文献引用，一般控制在2000字以内。
+\begin{conclusions}
+\item \textbf{在此填写第一项主要结论的标题}
+
+在此展开说明第一项主要结论，正文使用宋体常规字重。
+\item \textbf{在此填写第二项主要结论的标题}
+
+在此展开说明第二项主要结论。
+\end{conclusions}
+
+\input{houzhi.tex}
+\end{document}

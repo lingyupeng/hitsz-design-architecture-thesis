@@ -1,0 +1,36 @@
+% 前置内容：在这里填写论文信息、中英文摘要和关键词。
+% 由main.tex加载，不单独编译；排版设置仍在geshi.tex。
+% ==================== 01 论文信息 ==================== 中文标题正标题不超过25字，正副标题合计不超过35字。
+\newcommand{\thesisTitle}{在此填写中文论文题目}
+\newcommand{\thesisTitleEn}{YOUR THESIS TITLE IN ENGLISH}
+\newcommand{\thesisType}{学术学位论文} % 专硕改为：专业学位论文
+\newcommand{\authorName}{填写姓名}
+\newcommand{\authorNameEn}{Your Name}
+\newcommand{\supervisor}{填写导师及职称}
+\newcommand{\supervisorEn}{Prof. Your Supervisor}
+\newcommand{\degreeName}{工学硕士}
+\newcommand{\degreeNameEn}{Master of Engineering}
+\newcommand{\specialty}{建筑学}
+\newcommand{\specialtyEn}{Architecture}
+\newcommand{\submissionDate}{2026年12月}
+\newcommand{\defenseDate}{2026年12月}
+\newcommand{\defenseDateEn}{December, 2026}
+\newcommand{\classification}{待填写}
+\newcommand{\udc}{待填写}
+\newcommand{\schoolCode}{待填写}
+
+
+% ==================== 02 封面与内封 ====================
+\makecover\makeinnertitles\frontmatter
+% ==================== 03 中英文摘要 ====================
+\begin{cnabstract}
+在此填写中文摘要。依次概括研究背景、研究问题、研究内容与方法、主要结果和结论。摘要应独立完整，与英文摘要对应。
+\keywords{关键词一；关键词二；关键词三}
+\end{cnabstract}
+\begin{enabstract}
+Write the English abstract here. Its content should correspond to the Chinese abstract.
+\enkeywords{keyword one, keyword two, keyword three}
+\end{enabstract}
+
+\clearpage\tableofcontents
+

@@ -1,0 +1,18 @@
+% 字体由使用者按README.md自行准备；本仓库不分发字体文件。
+\setmainfont[Path=\mulu muban/ziti/,BoldFont=yingwen-cuti.ttf,ItalicFont=yingwen-xieti.ttf,BoldItalicFont=yingwen-cuxieti.ttf]{yingwen-zhengti.ttf}
+\setCJKmainfont[Path=\mulu muban/ziti/,FontIndex=0,AutoFakeBold=3.33333]{songti.ttc}
+\setCJKsansfont[Path=\mulu muban/ziti/,AutoFakeBold=2.5]{heiti.ttf}
+\setCJKmonofont[Path=\mulu muban/ziti/,FontIndex=0]{songti.ttc}
+\setCJKfamilyfont{zhsong}[Path=\mulu muban/ziti/,FontIndex=0,AutoFakeBold=3.33333]{songti.ttc}
+\setCJKfamilyfont{zhhei}[Path=\mulu muban/ziti/,AutoFakeBold=2.5]{heiti.ttf}
+\setCJKfamilyfont{zhkai}[Path=\mulu muban/ziti/,AutoFakeBold=2.5]{kaiti.ttf}
+
+\newcommand{\songti}{\CJKfamily{zhsong}}
+\newcommand{\heiti}{\CJKfamily{zhhei}}
+\newcommand{\kaishu}{\CJKfamily{zhkai}}
+% 独立Cambria Math TTF或Windows常见Cambria TTC集合，二选一。
+\IfFileExists{\mulu muban/ziti/shuxue.ttf}{%
+ \setmathfont[Path=\mulu muban/ziti/]{shuxue.ttf}%
+}{%
+ \setmathfont[Path=\mulu muban/ziti/,FontIndex=1]{shuxue.ttc}%
+}

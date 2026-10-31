@@ -1,0 +1,397 @@
+% !TeX program = xelatex
+% !BIB program = biber
+% 格式案例：临时将Main document切换为example.tex即可预览。
+% 正常写作时Main document选择main.tex；编译器选择XeLaTeX。
+% 本文件使用muban/lunwen.cls，另附示例文献库和两张示意图。
+\def\mulu{./}
+\makeatletter
+\edef\input@path{{\mulu muban/}{\mulu}}
+\makeatother
+\documentclass{lunwen}
+% 以下文献均为虚构的排版演示条目，保存在muban/example-wenxian.bib中，不改正式文献库。
+
+\edef\wenxianlujing{\mulu muban/example-wenxian.bib}
+\expandafter\addbibresource\expandafter{\wenxianlujing}
+
+% 分图编号采用全角括号，分图题保持五号字并放在分图下方。
+\DeclareCaptionLabelFormat{fenhao}{（#2）}
+\captionsetup[subfigure]{font=thesis,labelformat=fenhao,
+ labelsep=thesisspace,justification=centering,singlelinecheck=false}
+
+% 缺失值按两个正文数字的宽度居中。
+\newlength{\queshikuan}
+\newcommand{\queshizhi}{\makebox[\queshikuan][c]{—}}
+
+% 符号说明：正文续行对齐到破折号后的文字。
+\newcommand{\shiliangshuoming}[3]{%
+ \par\begingroup\hangindent=5.5em\hangafter=1\noindent
+ \makebox[2em][l]{#1}\makebox[1.5em][l]{$#2$}%
+ \makebox[2em][l]{——}#3\par\endgroup}
+
+\begin{document}
+\frontmatter\mainmatter
+\section{常用格式示例}
+
+% 标题层级示例：四级以内，正文首句不额外加粗。
+\subsection{标题层级与正文}
+本节演示中文正文、英文Architecture与数字0123456789混排。
+正文首句保持常规字重，中文说明使用全角标点。
+\subsubsection{三级标题示例}
+三级标题下正常书写正文。
+\paragraph{四级标题示例}
+四级标题以下不再增加第五级标题。
+
+% 一、图片插入与图片引用。
+\subsection{图片插入与引用}
+本文件中的图表数据和文献条目均用于排版演示；正式写作时替换为真实内容与来源。
+
+研究流程见\figref{fig:liucheng}。图片编号由模板自动生成。
+
+\begin{figure}[htbp]
+  \centering
+  % 修改下面的文件路径即可换图；.75表示正文宽度的75%。
+  \includegraphics[width=.75\linewidth]{\mulu tupian/example-liucheng.pdf}
+  \figurenote{注：此图为示意图，资料来源为作者绘制}
+  \caption{研究流程示意}
+  \label{fig:liucheng}
+\end{figure}
+
+引用图片使用以下命令：
+\begin{verbatim}
+\figref{fig:liucheng}
+\end{verbatim}
+图的标签写在\verb|\caption|后面。
+
+% 二、文献引用。使用现有文献库中的两个条目。
+\clearpage
+\subsection{文献引用}
+首次引用期刊文章\cite{case-journal}，随后引用专著\cite{case-book}。
+句中引用可以写作：由文献\inlinecite{case-conference}可知。
+
+学位论文、论文集析出文献和网页文献分别引用为
+\cite{case-thesis}、\cite{case-chapter}和\cite{case-web}。
+网页文献的示例条目同时填写网址与访问日期。
+
+同一文献不同页码的引用为\cite[15-18]{case-journal}，
+再次引用其他页码为\cite[22]{case-journal}，文献编号不变。
+非连续与连续文献合并引用可写为\cite{case-journal,case-conference,case-thesis,case-chapter}。
+
+\begin{verbatim}
+\cite{case-journal}
+\inlinecite{case-conference}
+\cite[15-18]{case-journal}
+\cite{case-journal,case-conference,case-thesis,case-chapter}
+\end{verbatim}
+
+参考文献末页分别演示期刊、专著、会议、学位论文、
+论文集析出文献和网页的著录。示例数量不代表正式论文的文献数量要求。
+
+% % 图片补充：分图、引用图题及续图。
+\clearpage
+\subsection{分图及来源标注}
+分图案例见\figref{fig:fentu}，其中左侧为
+\figref{fig:fentu}（\subref{fig:fentu-a}），右侧为
+\figref{fig:fentu}（\subref{fig:fentu-b}）。
+
+\begin{figure}[htbp]
+ \centering
+ \begin{subfigure}[t]{.46\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \figurenote{注：左侧方案说明}
+  \caption{方案甲}\label{fig:fentu-a}
+ \end{subfigure}\hfill
+ \begin{subfigure}[t]{.46\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \figurenote{注：右侧方案说明}
+  \caption{方案乙}\label{fig:fentu-b}
+ \end{subfigure}
+ \figurenote{注：分图说明位于各分图题上方，总说明位于总图题上方}
+ \caption{分图排版示例}\label{fig:fentu}
+\end{figure}
+
+
+引用来源应先在引出图片的正文中出现\cite{case-journal}，
+并在引用图的图题右上角再次标注，见\figref{fig:yuantu}。
+本例的图片是示意图，仅演示来源标注位置。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=.7\linewidth]{\mulu tupian/example-liucheng.pdf}
+ \figurenote{注：图题来源标注位置演示}
+ \caption{引用图题格式示例\cite{case-journal}}\label{fig:yuantu}
+\end{figure}
+
+
+\clearpage
+\subsection{跨页分图与续图}
+分图较多而需要跨页时，使用同一个图号，
+总图题只在第一页出现。示例见\figref{fig:xutu}。
+
+\begin{figure}[htbp]
+ \centering
+ \begin{subfigure}{.46\linewidth}
+  \centering\includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \caption{第一组方案}
+ \end{subfigure}\hfill
+ \begin{subfigure}{.46\linewidth}
+  \centering\includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \caption{第二组方案}
+ \end{subfigure}
+ \caption{多分图跨页排版示例}\label{fig:xutu}
+\end{figure}
+
+\clearpage
+% 续图页顶预留间距，避免图形接触页眉双线。
+\vspace*{8bp}
+\begin{figure}[htbp]
+ \ContinuedFloat
+ \setcounter{subfigure}{2}
+ \centering
+ \begin{subfigure}{.46\linewidth}
+  \centering\includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \caption{第三组方案}
+ \end{subfigure}\hfill
+ \begin{subfigure}{.46\linewidth}
+  \centering\includegraphics[width=\linewidth]{\mulu tupian/example-fentu.pdf}
+  \caption{第四组方案}
+ \end{subfigure}
+ \captionsetup{labelsep=none,list=no}
+ \caption{（续图）}
+\end{figure}
+
+
+\clearpage
+\subsection{坐标单位及地图要素}
+坐标图需要同时标明数值和相应计量单位，见\figref{fig:zuobiao}。
+
+\begin{figure}[htbp]
+ \centering\tablefont
+ \setlength{\unitlength}{1bp}
+ \begin{picture}(290,160)
+  \put(30,25){\vector(1,0){225}}
+  \put(30,25){\vector(0,1){110}}
+  \put(0,149){\makebox(0,0)[l]{高度（$\mathrm{m}$）}}
+  \put(190,5){\makebox(0,0)[l]{距离（$\mathrm{m}$）}}
+  \put(23,13){\makebox(0,0){0}}
+  \put(105,25){\line(0,1){4}}\put(105,13){\makebox(0,0){50}}
+  \put(180,25){\line(0,1){4}}\put(180,13){\makebox(0,0){100}}
+  \put(30,75){\line(1,0){4}}\put(18,75){\makebox(0,0){10}}
+  \put(30,125){\line(1,0){4}}\put(18,125){\makebox(0,0){20}}
+  \put(75,45){\circle*{3}}\put(120,70){\circle*{3}}
+  \put(165,95){\circle*{3}}\put(210,120){\circle*{3}}
+ \end{picture}
+ \caption{坐标与单位示例}\label{fig:zuobiao}
+\end{figure}
+
+
+地图要素的位置示意见\figref{fig:ditu}。
+此图不含真实地理底图，仅演示研究区、图例、指北针和比例尺的位置。
+正式地图应替换为合规底图，并检查领土完整与底图使用说明。
+
+\begin{figure}[htbp]
+ \centering\tablefont\setlength{\unitlength}{1bp}
+ \begin{picture}(290,165)
+  \put(20,35){\framebox(220,100){}}
+  \put(32,118){\makebox(0,0)[l]{示意底图}}
+  \put(80,65){\framebox(90,35){研究区}}
+  \put(260,80){\vector(0,1){55}}
+  \put(260,147){\makebox(0,0){北}}
+  \put(35,17){\line(1,0){100}}
+  \put(35,14){\line(0,1){6}}
+  \put(85,14){\line(0,1){6}}
+  \put(135,14){\line(0,1){6}}
+  \put(35,5){\makebox(0,0){0}}
+  \put(85,5){\makebox(0,0){50}}
+  \put(135,5){\makebox(0,0){100 $\mathrm{m}$}}
+  \put(190,12){\framebox(10,7){}}
+  \put(206,15){\makebox(0,0)[l]{研究区}}
+ \end{picture}
+ \caption{地图要素位置示意}\label{fig:ditu}
+\end{figure}
+
+
+% 三、普通三线表与表格引用。
+\clearpage
+\subsection{三线表制作与引用}
+研究变量见\tabref{tab:bianliang}。表题位于表格上方。
+
+\begin{table}[htbp]
+  \centering\tablefont
+  \caption{研究变量说明}
+  \label{tab:bianliang}
+  \begin{tabularx}{\linewidth}{lXr}
+    \toprule
+    变量 & 含义 & 示例值\\
+    \midrule
+    Area & 研究单元面积（$\mathrm{m}^2$） & 1200\\
+    Count & 观测数量 & 36\\
+    Score & 综合得分 & 3.14\\
+    Other & 缺失值 & —\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+引用表格使用以下命令：
+\begin{verbatim}
+\tabref{tab:bianliang}
+\end{verbatim}
+表格标签写在\verb|\caption|后面。
+
+三条横线分别由\verb|\toprule|、\verb|\midrule|、\verb|\bottomrule|生成。
+单元格之间用\verb|&|分隔，每行以\verb|\\|结束。
+
+% 表格补充：统一单位、合并单元格和引用表题。
+\clearpage
+\subsection{统一单位与合并单元格}
+全表数值均为面积时，将单位放在表头右上方，见\tabref{tab:danwei}。
+表内缺失值按两个数字的宽度居中。
+
+\begin{table}[htbp]
+ \centering\tablefont
+ \settowidth{\queshikuan}{00}
+ \caption{统一单位与单元格合并示例}\label{tab:danwei}
+ \begin{tabularx}{\linewidth}{lXrr}
+  \multicolumn{4}{r}{（$\mathrm{m}^2$）}\\
+  \toprule 分组 & 编号 & 更新前 & 更新后\\\midrule
+  \multirow{2}{*}{甲组} & A01 & 1200 & 1500\\
+   & A02 & 1300 & 1600\\
+  乙组 & B01 & \multicolumn{2}{c}{\queshizhi}\\
+  \multicolumn{2}{l}{合计} & 2500 & 3100\\
+  \bottomrule
+ \end{tabularx}
+\end{table}
+
+纵向合并使用\verb|\multirow|，横向合并使用\verb|\multicolumn|。
+本表的分组纵向合并，合计标签及缺失区域横向合并。
+
+引用文献中的表格，应先在正文标注来源\cite{case-journal}，
+再在表题右上角标注，见\tabref{tab:yinyong}。
+Word硕士模板通常只用中文表题；本例额外显示英文行，
+用于演示PPT提及的英文表题来源标注位置，普通表格保持中文表题。
+
+\begin{table}[htbp]
+ \centering\tablefont
+ \caption{引用表题格式示例\cite{case-journal}}\label{tab:yinyong}
+ \caption*{Table \thetable\quad Example of source citation\cite{case-journal}}
+ \begin{tabularx}{\linewidth}{Xr}
+  \toprule 对象 & 示意数值\\\midrule
+  测试甲 & 10\\
+  测试乙 & 20\\\bottomrule
+ \end{tabularx}
+\end{table}
+
+
+% 四、跨页表格。续表沿用“表号（续表）”右对齐的形式。
+\clearpage
+\subsection{跨页表格与续表}
+较长的数据表使用\verb|longtable|，见\tabref{tab:changbiao}。
+本例通过足够多的数据行自然产生续页，续表标题保持右对齐。
+\begingroup
+\tablefont
+\begin{longtable}{p{25mm}p{108mm}}
+  % 第一页的表题及表头。
+  \caption{研究单元记录}\label{tab:changbiao}\\
+  \toprule
+  研究单元 & 观测记录\\
+  \midrule
+  \endfirsthead
+
+  % 续页的表题及表头。8bp只调整续页表头的上方留白。
+  \noalign{\vskip 8bp}
+  \multicolumn{2}{r}{表\thetable（续表）}\\
+  \toprule
+  研究单元 & 观测记录\\
+  \midrule
+  \endhead
+
+  % 每页表格底线。
+  \bottomrule
+  \endfoot
+
+  单元01 & 开放空间面积为1200平方米\\
+  单元02 & 开放空间面积为1250平方米\\
+  单元03 & 开放空间面积为1300平方米\\
+  单元04 & 开放空间面积为1350平方米\\
+  单元05 & 开放空间面积为1400平方米\\
+  单元06 & 开放空间面积为1450平方米\\
+  单元07 & 开放空间面积为1500平方米\\
+  单元08 & 开放空间面积为1550平方米\\
+  单元09 & 开放空间面积为1600平方米\\
+  单元10 & 开放空间面积为1650平方米\\
+  单元11 & 开放空间面积为1700平方米\\
+  单元12 & 开放空间面积为1750平方米\\
+  单元13 & 开放空间面积为1800平方米\\
+  单元14 & 开放空间面积为1850平方米\\
+  单元15 & 开放空间面积为1900平方米\\
+  单元16 & 开放空间面积为1950平方米\\
+  单元17 & 开放空间面积为2000平方米\\
+  单元18 & 开放空间面积为2050平方米\\
+  单元19 & 开放空间面积为2100平方米\\
+  单元20 & 开放空间面积为2150平方米\\
+  单元21 & 开放空间面积为2200平方米\\
+  单元22 & 开放空间面积为2250平方米\\
+  单元23 & 开放空间面积为2300平方米\\
+  单元24 & 开放空间面积为2350平方米\\
+  单元25 & 开放空间面积为2400平方米\\
+  单元26 & 开放空间面积为2450平方米\\
+  单元27 & 开放空间面积为2500平方米\\
+  单元28 & 开放空间面积为2550平方米\\
+  单元29 & 开放空间面积为2600平方米\\
+  单元30 & 开放空间面积为2650平方米\\
+  单元31 & 开放空间面积为2700平方米\\
+  单元32 & 开放空间面积为2750平方米\\
+  单元33 & 开放空间面积为2800平方米\\
+  单元34 & 开放空间面积为2850平方米\\
+  单元35 & 开放空间面积为2900平方米\\
+  单元36 & 开放空间面积为2950平方米\\
+  单元37 & 开放空间面积为3000平方米\\
+  单元38 & 开放空间面积为3050平方米\\
+  单元39 & 开放空间面积为3100平方米\\
+  单元40 & 开放空间面积为3150平方米\\
+\end{longtable}
+\endgroup
+
+% 五、公式及公式引用。
+\clearpage
+\subsection{公式制作与引用}
+行内公式直接放在正文中，例如$P_i=N_i/A_i$。
+
+独立编号公式见\eqnref{eq:zhibiao}。
+\begin{equation}
+  P_i=\frac{N_i}{A_i}\qquad i=1,2,\ldots,10
+  \label{eq:zhibiao}
+\end{equation}
+\shiliangshuoming{式中}{P_i}{第$i$个研究单元的指标值。这里使用较长的说明文字演示自动换行，续行应对齐到破折号后第一个汉字的位置，而不是回到整段的左边界。}
+\shiliangshuoming{}{N_i}{第$i$个研究单元的观测数量。}
+\shiliangshuoming{}{A_i}{第$i$个研究单元的面积，单位为$\mathrm{m}^2$。}
+公式引用使用\verb|\eqnref{eq:zhibiao}|，标签写在公式环境内。
+
+下式同时演示求和、根号、上下标及主副分数线：
+\begin{equation}
+  Q_i=\frac{\dfrac{\sum_{j=1}^{n}w_jx_{ij}}{\sum_{j=1}^{n}w_j}}{\sqrt{1+\alpha^2}}
+  \label{eq:zonghe}
+\end{equation}
+\shiliangshuoming{式中}{Q_i}{第$i$个研究单元的综合指标。}
+\shiliangshuoming{}{w_j}{第$j$项指标的权重，权重总和不为零。}
+\shiliangshuoming{}{x_{ij}}{第$i$个研究单元的第$j$项指标观测值。}
+\shiliangshuoming{}{n}{参与计算的指标总数。}
+\shiliangshuoming{}{\alpha}{调节参数。}
+
+多行公式共用一个编号时，使用\verb|aligned|：
+\begin{equation}
+  \begin{aligned}
+    S_i &= \frac{\sum_{j=1}^{n}w_jx_{ij}}{\sum_{j=1}^{n}w_j}\\
+    Q_i &= \frac{S_i}{\sqrt{1+\alpha^2}}
+  \end{aligned}
+  \label{eq:duohang}
+\end{equation}
+\shiliangshuoming{式中}{S_i}{第$i$个研究单元的加权平均值，其余符号含义同前。}
+再次引用时写作\eqnref{eq:duohang}。
+
+\subsection{本章小结}
+本章展示了正文中常用的图表、引用和公式排版方式。小结保持纯文字归纳。
+
+\printbibliography[heading=bibintoc,title={参考文献}]
+\end{document}

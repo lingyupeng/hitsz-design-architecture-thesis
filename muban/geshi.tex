@@ -1,0 +1,195 @@
+% 共同排版设置；各节对应 shuoming/shuoming.md 中的修改索引。
+
+% ==================== 01 页面布局：页边距、页眉双线、页码 ====================
+% 页面布局：纸张、边距、页眉双线、页脚和前置页页码。
+
+\RequirePackage{geometry}
+% DOCX 正文分节：左右 1701 twip，上下 1616 twip。
+\geometry{left=30mm,right=30mm,top=35mm,bottom=28.50mm,headheight=14pt,headsep=-1.6bp,footskip=5.5mm}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[C]{\songti\fontsize{9bp}{11bp}\selectfont 哈尔滨工业大学硕士学位论文}
+\fancyfoot[C]{\fontsize{9bp}{11bp}\selectfont\raisebox{4.64bp}[0pt][0pt]{-\ \thepage\ -}}
+\renewcommand{\headrule}{\vskip .579bp\hrule height 2.25bp\vskip .75bp\hrule height .75bp\vskip -1.66279bp}
+\fancypagestyle{plain}{\pagestyle{fancy}}
+\let\hitfrontmatter\frontmatter
+\renewcommand{\frontmatter}{\hitfrontmatter\pagenumbering{Roman}\setlength{\topskip}{20bp}}
+
+% ==================== 02 文字排版：字号、行距、标题与目录 ====================
+% 文字与标题：正文行距、标题层级、图表公式编号、目录层级与间距。
+
+\ctexset{
+ chapter={name={第,章},number=\arabic{chapter},format=\centering\normalfont\mdseries\heiti\fontsize{18bp}{25.875bp}\selectfont,beforeskip=25.875bp,afterskip=20.7bp,aftername=\quad,fixskip=true},
+ section={format=\normalfont\mdseries\heiti\fontsize{15bp}{21.5625bp}\selectfont,beforeskip=10.8bp,afterskip=10.8bp,aftername=\quad},
+ subsection={format=\normalfont\mdseries\heiti\fontsize{14bp}{20.125bp}\selectfont,beforeskip=10.1bp,afterskip=10.1bp,aftername=\quad},
+ subsubsection={format=\normalfont\mdseries\heiti\zihao{-4},beforeskip=10.55bp,afterskip=10.55bp,aftername=\quad},
+ contentsname={目\quad 录},figurename=图,tablename=表}
+% 二至四级标题：页中保留半行段前/段后；页首按Word效果取消段前空白。
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+% Word 正文1.25倍行距（12bp Times/宋体混排）：同字体参照渲染基线约21.1bp。
+\linespread{1}
+\renewcommand{\normalsize}{\fontsize{12bp}{21.1bp}\selectfont}
+\AtBeginDocument{\normalsize\setlength{\parindent}{2em}\setlength{\parskip}{0pt}}
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\makeatletter
+\renewcommand{\tagform@}[1]{\maketag@@@{（\ignorespaces#1\unskip\@@italiccorr）}}
+\makeatother
+% 目录按 Word TOC1/TOC2/TOC3 分别设定，不继承正文行距。
+\renewcommand{\cftchapfont}{\heiti\fontsize{12bp}{19.6bp}\selectfont}
+\renewcommand{\cftchappagefont}{\normalfont\fontsize{12bp}{19.6bp}\selectfont}
+\renewcommand{\cftsecfont}{\songti\fontsize{12bp}{20.6bp}\selectfont}
+\renewcommand{\cftsecpagefont}{\normalfont\fontsize{12bp}{20.6bp}\selectfont}
+\renewcommand{\cftsubsecfont}{\songti\fontsize{12bp}{20.25bp}\selectfont}
+\renewcommand{\cftsubsecpagefont}{\normalfont\fontsize{12bp}{20.25bp}\selectfont}
+\setlength{\cftbeforechapskip}{0pt}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\cftsetindents{chapter}{0pt}{55bp}
+\cftsetindents{section}{12bp}{21bp}
+\cftsetindents{subsection}{24bp}{30bp}
+\makeatletter
+\let\hit@l@chapter\l@chapter
+\let\hit@l@section\l@section
+\let\hit@l@subsection\l@subsection
+\renewcommand{\l@chapter}[2]{\begingroup\fontsize{12bp}{19.6bp}\selectfont\hit@l@chapter{#1}{#2}\endgroup}
+\renewcommand{\l@section}[2]{\begingroup\fontsize{12bp}{20.6bp}\selectfont\hit@l@section{#1}{#2}\endgroup}
+\renewcommand{\l@subsection}[2]{\begingroup\fontsize{12bp}{20.25bp}\selectfont\hit@l@subsection{#1}{#2}\endgroup}
+\makeatother
+\renewcommand{\cftdotsep}{0}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cfttoctitlefont}{\hfill\heiti\fontsize{18bp}{25.875bp}\selectfont}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength{\cftbeforetoctitleskip}{2.338bp}
+\setlength{\cftaftertoctitleskip}{22.05bp}
+
+% ==================== 03 图表排版：图题、表题、线宽、浮动及交叉引用 ====================
+% 图表排版：三线表线宽、图题表题、浮动间距、图注和交叉引用。
+
+% Word 三线表：边线12个八分之一磅，中线6个八分之一磅。
+\setlength{\heavyrulewidth}{1.5bp}
+\setlength{\lightrulewidth}{.75bp}
+\DeclareCaptionFont{thesis}{\songti\fontsize{10.5bp}{15bp}\selectfont}
+\DeclareCaptionLabelSeparator{thesisspace}{\hspace{.5em}}
+\captionsetup{font=thesis,labelfont=normalfont,labelsep=thesisspace,justification=centering,singlelinecheck=false}
+% 图与图题、表题与表的内部间距；不用于设置图表与正文的距离。
+\captionsetup[figure]{position=bottom,skip=4bp,belowskip=0bp}
+\captionsetup[table]{position=top,skip=4bp,belowskip=0bp}
+% 与正文的外部间距：正文基线21.1bp × 0.5 = 10.55bp（约3.72mm）。
+% 图：前段→图片；图题→后段。表：前段→表题；表格→后段。
+\setlength{\textfloatsep}{10.55bp}
+\setlength{\intextsep}{10.55bp}
+\renewcommand{\topfraction}{.90}
+\renewcommand{\bottomfraction}{.85}
+\renewcommand{\textfraction}{.08}
+\renewcommand{\floatpagefraction}{.75}
+% longtable不使用普通浮动体间距，需另设前后半行。
+\setlength{\LTpre}{10.55bp}
+\setlength{\LTpost}{10.55bp}
+\newcommand{\tablefont}{\songti\fontsize{10.5bp}{15bp}\selectfont}
+\newcommand{\figurenote}[1]{\par\smallskip{\tablefont #1\par}}
+\newcommand{\figref}[1]{图\ref{#1}}
+\newcommand{\tabref}[1]{表\ref{#1}}
+\newcommand{\eqnref}[1]{式（\ref{#1}）}
+
+% ==================== 04 前置页：封面、内封、摘要和非编号标题 ====================
+% 封面与前置页：中英文内封、摘要与关键词、非编号页标题。
+
+% Word 非章节标题独立于正文章标题：摘要/结论/参考文献等。
+\newcommand{\thesischapter}[1]{\begingroup
+ \ctexset{chapter={beforeskip=28.743bp,afterskip=31.781bp}}%
+ \chapter*{#1}\phantomsection\addcontentsline{toc}{chapter}{#1}\endgroup}
+\newenvironment{cnabstract}{\thesischapter{摘\quad 要}\songti\fontsize{12bp}{20.6bp}\selectfont}{\par}
+\newcommand{\thesisenglishabstract}{\begingroup
+ \ctexset{chapter={beforeskip=27.39bp,afterskip=32.072bp}}%
+ \chapter*{Abstract}\phantomsection\addcontentsline{toc}{chapter}{Abstract}\endgroup}
+\newcommand{\keywords}[1]{\par\vspace{\baselineskip}\noindent\hangindent=4em\hangafter=1\textbf{关键词：}#1\par}
+\newcommand{\enkeywords}[1]{\par\vspace{\baselineskip}\noindent\hangindent=5.2em\hangafter=1\textbf{Keywords: }#1\par}
+\newcommand{\makecover}{%
+ \begin{titlepage}\centering
+ \vspace*{12mm}{\songti\bfseries\zihao{-1}硕士学位论文\par}
+ \vspace{8mm}{\songti\bfseries\zihao{-2}（\thesisType）\par}
+ \vspace{24mm}{\heiti\zihao{2}\thesisTitle\par}
+ \vspace{10mm}{\bfseries\fontsize{20bp}{26bp}\selectfont\thesisTitleEn\par}
+ \vfill{\songti\bfseries\zihao{-2}\authorName\par}
+ \vspace{20mm}{\kaishu\bfseries\zihao{-2}哈尔滨工业大学\par}
+ \vspace{8mm}{\songti\bfseries\zihao{-2}\submissionDate\par}
+ \end{titlepage}}
+\newcommand{\makeinnertitles}{%
+ \begin{titlepage}
+ \vspace*{-17.32bp}\begingroup\fontsize{12bp}{16.9bp}\selectfont
+ \noindent 国内图书分类号：\classification\hfill 学校代码：\schoolCode\par
+ \noindent 国际图书分类号：\udc\hfill 密级：公开\par\endgroup
+ \vspace{32.597mm}\begin{center}{\songti\bfseries\zihao{-2}硕士学位论文\par}
+ \vspace{19.883mm}{\normalfont\mdseries\heiti\fontsize{22bp}{41.2bp}\selectfont\xeCJKsetup{CJKglue={\hskip .528bp}}%
+ % 内封题目至少预留两行，单行题目不会上提下方信息区。
+ \setbox0=\vbox{\hsize=\textwidth\centering\thesisTitle\par}%
+ \dimen0=\dimexpr\ht0+\dp0\relax\unvbox0
+ \ifdim\dimen0<41.2bp\vspace{41.2bp}\fi}\end{center}
+ \vspace{58.835bp}\begin{center}\fontsize{14bp}{24.15bp}\selectfont\renewcommand{\arraystretch}{1}
+ \setlength{\tabcolsep}{0pt}
+ \begin{tabular}{@{}p{90.3bp}p{15.05bp}p{160.95bp}@{}}
+ \makebox[90.3bp][s]{\heiti 硕\hfill 士\hfill 研\hfill 究\hfill 生}\rule[-7.45bp]{0pt}{27.45bp}&：&\authorName\\
+ \makebox[90.3bp][s]{\heiti 导\hfill 师}\rule[-7.45bp]{0pt}{27.45bp}&：&\supervisor\\
+ \makebox[90.3bp][s]{\heiti 申\hfill 请\hfill 学\hfill 位}\rule[-7.45bp]{0pt}{27.45bp}&：&\degreeName\\
+ \makebox[90.3bp][s]{\heiti 学\hfill 科}\rule[-7.45bp]{0pt}{27.45bp}&：&\specialty\\
+ \makebox[90.3bp][s]{\heiti 所\hfill 在\hfill 单\hfill 位}\rule[-7.45bp]{0pt}{27.45bp}&：&哈尔滨工业大学（深圳）\\
+ \makebox[90.3bp][s]{\heiti 答\hfill 辩\hfill 日\hfill 期}\rule[-7.45bp]{0pt}{27.45bp}&：&\defenseDate\\
+ \makebox[90.3bp][s]{\heiti 授\hfill 予\hfill 学\hfill 位\hfill 单\hfill 位}\rule[-7.45bp]{0pt}{27.45bp}&：&哈尔滨工业大学
+ \end{tabular}\end{center}
+ \end{titlepage}
+ \begin{titlepage}
+ \noindent Classified Index: \classification\par\noindent U.D.C: \udc\par
+ \vspace{22mm}\begin{center}{\fontsize{18bp}{24bp}\selectfont Dissertation for the Master Degree\par}
+ \vspace{16mm}{\bfseries\fontsize{20bp}{26bp}\selectfont\thesisTitleEn\par}\end{center}
+ \vfill
+ {\fontsize{14bp}{22bp}\selectfont\renewcommand{\arraystretch}{1}\setlength{\tabcolsep}{0pt}\noindent%
+ \makebox[\textwidth][c]{%
+ \begin{tabular}{@{\hspace{5.4bp}}>{\bfseries}p{202.3bp}@{\hspace{10.8bp}}p{218.75bp}@{\hspace{5.4bp}}}%
+ \rule[-6.6bp]{0pt}{22bp}Candidate:&\authorNameEn\\
+ \rule[-6.6bp]{0pt}{22bp}Supervisor:&\supervisorEn\\
+ \rule[-6.6bp]{0pt}{22bp}Academic Degree Applied for:&\degreeNameEn\\
+ \rule[-6.6bp]{0pt}{22bp}Specialty:&\specialtyEn\\
+ \rule[-6.6bp]{0pt}{22bp}Affiliation:&\resizebox{218.75bp}{!}{Harbin Institute of Technology, Shenzhen}\\
+ \rule[-6.6bp]{0pt}{22bp}Date of Defense:&\defenseDateEn\\
+ \rule[-6.6bp]{0pt}{22bp}Degree-Conferring-Institution:&Harbin Institute of Technology
+ \end{tabular}}\par}
+ \vspace*{24.635mm}\end{titlepage}}
+
+% ==================== 05 参考文献排版：标题、字号与行距 ====================
+% 参考文献排版：标题、字号、行距。文献库由各入口单独指定。
+
+\defbibheading{bibintoc}[参考文献]{\thesischapter{#1}}
+\AtBeginEnvironment{thebibliography}{\tablefont}
+\renewcommand{\bibfont}{\songti\fontsize{12bp}{21.1bp}\selectfont}
+\setlength{\bibitemsep}{0pt}
+
+% ==================== 06 后置页：结论、成果、声明和签名 ====================
+% 后置页：结论、创新成果、声明小标题、签名和使用权限条款。
+
+\setlist[enumerate]{label=（\arabic*）,leftmargin=4em,itemindent=-2em,itemsep=0pt,parsep=0pt,topsep=0pt}
+\newenvironment{conclusions}{\begin{enumerate}[label=（\arabic*）,leftmargin=0pt,labelwidth=2.5em,labelsep=0pt,itemindent=4.5em,listparindent=2em,font=\bfseries,itemsep=0pt,parsep=0pt,topsep=0pt]}{\end{enumerate}}
+\newcommand{\achievementcategory}[1]{\par\noindent{\songti\bfseries\fontsize{12bp}{21.1bp}\selectfont#1\par}\nobreak\vspace{5bp}}
+\newenvironment{achievementlist}{\begingroup\songti\fontsize{12bp}{21.1bp}\selectfont\begin{enumerate}[label={[\arabic*]},leftmargin=24bp,labelwidth=18bp,labelsep=6bp,itemindent=0pt,font=\normalfont,itemsep=0pt,parsep=0pt,topsep=0pt]}{\end{enumerate}\endgroup\vspace{5bp}}
+\newcommand{\statementheading}[1]{\par\noindent{\centering\normalfont\mdseries\heiti\fontsize{15bp}{21.5625bp}\selectfont#1\par}\nobreak\vspace{22.35bp}}
+\newcommand{\signatureline}[1]{\par\noindent\hspace*{79.56bp}\makebox[168.75bp][l]{#1：}日期：\hspace{17bp}年\hspace{17bp}月\hspace{17bp}日\par}
+\newenvironment{permissionclauses}{\begin{enumerate}[label=（\arabic*）,leftmargin=0pt,labelwidth=2.5em,labelsep=0pt,itemindent=4.5em,listparindent=2em,font=\normalfont,itemsep=0pt,parsep=0pt,topsep=0pt]}{\end{enumerate}}
+
+% ==================== 07 摘要和后置页的专用排版接口 ====================
+% qianzhi.tex和houzhi.tex填写前后置内容；这里集中管理它们的局部格式。
+\newenvironment{enabstract}{%
+ \begingroup\fontsize{12bp}{18bp}\selectfont
+ \thesisenglishabstract
+}{\par\endgroup}
+\newcommand{\conclusiontitle}{\thesischapter{结\quad 论}\vspace{-1.85bp}}
+\newcommand{\achievementtitle}{\thesischapter{攻读硕士学位期间取得创新性成果}\vspace{-1.85bp}}
+\newenvironment{thesisstatement}{%
+ \thesischapter{哈尔滨工业大学学位论文原创性声明和使用权限}%
+ \begingroup\setlength{\topskip}{20bp}\setlength{\parindent}{25.15bp}\vspace{25.72bp}
+}{\par\endgroup}
+\newcommand{\originalitysignature}{\vspace{20.35bp}\signatureline{作者签名}}
+\newcommand{\permissionheading}{\vspace{73.93bp}\statementheading{学位论文使用权限}}
+\newcommand{\permissionsignatures}{%
+ \vspace{21.1bp}\signatureline{作者签名}\par
+ \vspace{21.1bp}\signatureline{导师签名}}
